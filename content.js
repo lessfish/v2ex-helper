@@ -1,9 +1,8 @@
 // the script can deal with DOM
 window.onload = function() {
-  // find the replies, and append "see" button
+  // find the replies, and append "check" button
   if (location.href.includes('notifications')) {
-    let lis = [].slice.call(document.querySelectorAll('#Main > div:nth-child(2) > .cell'), 0)
-    lis = lis.filter(item => item.id)
+    let lis = [].slice.call(document.querySelectorAll('#Main > div:nth-child(2) > .cell[id]'))
 
     lis.forEach(item => {
       let html = item.querySelector('table > tbody > tr > td:nth-child(2) > span.fade').innerHTML.trim()
@@ -27,8 +26,7 @@ window.onload = function() {
   // scroll
   if (location.search.includes('isJump')) {
     let floor = ~~(location.hash.replace(/#reply/, ''))
-    let lis = [].slice.call(document.querySelectorAll('#Main > div:nth-child(4) > .cell'), 0)
-    lis = lis.filter(item => item.id)
+    let lis = [].slice.call(document.querySelectorAll('#Main > div:nth-child(4) > .cell[id]'))
     
     // if the floor is not in the current page, then go to the correct page
     let expPage = ~~(floor / 100) + 1 // expected page
@@ -44,19 +42,8 @@ window.onload = function() {
       floor %= 100
 
       // jump to lis[floor - 1]
-      let top = getElementTop(lis[floor - 1])
-      window.scrollTo(0, top)
+      lis[floor - 1].scrollIntoView()
       lis[floor - 1].style.background = "#FFF9EB"
     }
-  }
-
-  function getElementTop(element) {
-    let actualTop = element.offsetTop
-    let current = element.offsetParent
-    while (current) {
-      actualTop += current.offsetTop
-      current = current.offsetParent
-    }
-    return actualTop
   }
 }
