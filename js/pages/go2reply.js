@@ -1,5 +1,5 @@
 // the script can deal with DOM
-window.onload = function() {
+function go2reply() {
   // find the replies, and append "check" button
   if (location.href.includes('notifications')) {
     let lis = [].slice.call(document.querySelectorAll('#Main > div:nth-child(2) > .cell[id]'))
@@ -42,8 +42,10 @@ window.onload = function() {
       floor %= 100
 
       // jump to lis[floor - 1]
-      lis[floor - 1].scrollIntoView()
-      lis[floor - 1].style.background = "#FFF9EB"
+      setTimeout(() => {
+        lis[floor - 1].scrollIntoView()
+        lis[floor - 1].style.background = "#FFF9EB"
+      }, 0)
     }
   }
 }
