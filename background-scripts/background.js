@@ -9,6 +9,8 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     let xhr = new XMLHttpRequest()
     let data = new FormData()
 
+    // post 的数据，值为图片的 base64 编码
+    // 需要去掉类似前缀 `data:image/jpeg;base64,`
     data.append('b64_data', message.dataURL)
 
     xhr.onerror = () => {} // todo
