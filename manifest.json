@@ -1,65 +1,82 @@
 {
   "name": "V2EX HELPER",
   "manifest_version": 2,
-  "version": "1.0",
+  "version": "1.1.0",
   "description": "the way to make v2ex better",
-  // "icons": { "128": "icon_128.png" },  
+  "icons":
+  {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png"
+  },
 
   // 或者是 page_action
   "browser_action": {
     "default_title": "",
-    "default_icon": "images/v2ex.png",
-    "default_popup": "popups/popup.html" 
+    "default_icon": "images/icon_48.png"
+    // "default_popup": "popup/popup.html" 
   },
   
   "background": {
-    "scripts": ["background-scripts/jquery.min.js", "background-scripts/background.js"] // 或者设置项为 background.html，然后在它那引入 background.js
+    // 或者设置项为 background.html，然后在它那引入 background.js
+    "scripts": [
+      "background-scripts/background.js"
+    ] 
   },
   
   // "options_ui": {
-  //   "page": "options.html"
+  //   "page": "option/option.html"
   // },
-
-  "options_page": "options/options.html",
 
   "permissions": [
     "tabs",
-    "*://cdn.bootcss.com/*",
     "*://*.weibo.com/*"
   ],
 
   "content_scripts": [
     {
-      //"matches": ["http://*/*", "https://*/*"],
-      // "<all_urls>" 表示匹配所有地址
-      "matches": ["*://www.v2ex.com/*"],
-      // 多个 JS 按顺序注入
-      // ================== //
-      // DONE
-      // 消息回复跳到指定楼层
-      // ================== //
-      // TODO
-      // 主题图床
-      // 回复图床
-      // 对话详情（参考知乎）
-      // 主题图片点击放大
+      // 回复跳到指定楼层
+      "matches": ["*://www.v2ex.com/notifications*"],
       "js": [
-        "content-scripts/lib/jquery.min.js"
-        , "content-scripts/lib/bootstrap.min.js"
-        , "content-scripts/lib/zoom.min.js"
-        , "content-scripts/content.js" // 核心
-        , "content-scripts/go2reply.js" // 消息回复跳到指定楼层
-        , "content-scripts/zoom.js" // 主题帖图片点击放大功能
-        , "content-scripts/upload.js" // 发布新帖上传图片功能
-      ],
-      "css": [
-        "styles/zoom.css"
+        "content-scripts/checkReply/insertCheckBtn.js" 
       ],
       // JS 的注入可以随便一点，但是 CSS 的注入就要千万小心了，因为一不小心就可能影响全局样式
       // 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle
-      "run_at": "document_start"
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://www.v2ex.com/t/*isJump=1*"],
+      "js": [
+        "content-scripts/checkReply/jump.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      // zoom
+      "matches": ["*://www.v2ex.com/t/*"],
+      "js": [
+        "content-scripts/lib/jquery.min.js"
+        , "content-scripts/lib/transition.js"
+        , "content-scripts/lib/zoom.min.js"
+        , "content-scripts/zoom/zoom.js"
+      ],
+      "css": [
+        "styles/lib/zoom.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      // upload img in creating a new topic
+      "matches": ["*://www.v2ex.com/new"],
+      "js": [
+        "content-scripts/lib/jquery.min.js",
+        "content-scripts/uploadImg/uploadImg.js" 
+      ],
+      "css": [
+        "styles/all.css"
+      ],
+      "run_at": "document_end"
     }
   ],
 
-  "web_accessible_resources": ["img/*"]
+  "web_accessible_resources": []
 }
