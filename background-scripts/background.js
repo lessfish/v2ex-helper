@@ -18,12 +18,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         const pattern = /"pid":"(.+)"/
         let data = xhr.responseText
         let imgUrlPrefix = 'https://ws2.sinaimg.cn/large/'
-        let imgUrlSuffix = message.suffix
         let pid = data.match(pattern)[1]
-  
+        
         sendResponse({
           status: 0, // success
-          imgUrl: imgUrlPrefix + pid + imgUrlSuffix
+          imgUrl: imgUrlPrefix + pid
         })
       } catch(err) {
         sendResponse({

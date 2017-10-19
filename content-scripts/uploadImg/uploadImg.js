@@ -29,12 +29,10 @@
 
     reader.onload = function() {
       let res = reader.result
-      let suffix = res.split(',')[0].includes('image/gif') ? '.gif' : '.jpg'
       let dataURL = res.split(',')[1]
 
       chrome.runtime.sendMessage({
         method: 'uploadImgInTopic',
-        suffix: suffix,
         dataURL: dataURL
       }, function(response) {
         if (response.status === 1) {
