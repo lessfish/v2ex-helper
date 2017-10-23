@@ -19,6 +19,11 @@
 
   // add listener
   document.querySelector('#uploadImgBtn').addEventListener('change', function() {
+    if (!this.files[0].type.includes('image')) {
+      alert('请上传正确的图片格式文件 😄')
+      return
+    }
+
     if (this.files.length === 0) return 
 
     // change trigger btn status
@@ -36,7 +41,7 @@
         dataURL: dataURL
       }, function(response) {
         if (response.status === 1) {
-          alert('请先登录微博')
+          alert('请先登录微博 😄')
           location.reload()
           return
         }
