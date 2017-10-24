@@ -42,6 +42,7 @@
       }, function(response) {
         if (response.status === 1) {
           alert('请先登录微博 😄')
+          window.open("https://weibo.com/")
           location.reload()
           return
         }

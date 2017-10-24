@@ -1,4 +1,5 @@
 /* www.v2ex.com/new */
+/* 发帖添加图片 */
 #uploadImgBtn {
   float: right;
   display: none;
@@ -15,4 +16,52 @@
 
 .not-allow {
   pointer-events: none;
+}
+
+/* www.v2ex.com/t/ */
+/* 对话详情 */
+#checkConversationBtn {
+  padding-left: 10px;
+  color: #ccc;
+  font-size: 12px;
+}
+
+#checkConversationBtn > i {
+  padding-right: 4px;
+}
+
+#checkConversationBtn:hover {
+  opacity: .7;
+}
+
+#conversationModal.modal {
+  max-width: 800px;
+  padding: 10px;
+  line-height: 1.6 !important;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+#conversationModal.modal > .cell {
+  overflow: hidden;
+}
+
+#conversationModal.modal > .cell > .left {
+  float: left;
+}
+
+#conversationModal.modal > .cell > .left img {
+  border-radius: 4px;
+}
+
+#conversationModal.modal > .cell > .right {
+  margin-left: 60px;
+}
+
+#conversationModal.modal > .cell > .right {
+  margin-left: 60px;
+}
+#conversationModal.modal > .cell > .right > .author {
+  color: gray;
+  margin-bottom: 10px;
 }

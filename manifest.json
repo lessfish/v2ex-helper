@@ -16,13 +16,13 @@
       "19": "images/icon_19.png",
       "38": "images/icon_38.png"
     }
-    // "default_icon": "images/icon_48.png"
     // "default_popup": "popup/popup.html" 
   },
   
   "background": {
     // 或者设置项为 background.html，然后在它那引入 background.js
     "scripts": [
+      "background-scripts/lib/jquery.min.js",
       "background-scripts/background.js"
     ] 
   },
@@ -30,7 +30,7 @@
   // "options_ui": {
   //   "page": "option/option.html"
   // },
-
+  
   "permissions": [
     "tabs",
     "*://*.weibo.com/*"
@@ -77,6 +77,21 @@
       ],
       "css": [
         "styles/all.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      // 对话详情
+      "matches": ["*://www.v2ex.com/t/*"],
+      "js": [
+        "content-scripts/lib/jquery.min.js",
+        "content-scripts/lib/jquery.modal.min.js",
+        "content-scripts/checkConversation/checkConversation.js"
+      ],
+      "css": [
+        "styles/all.css",
+        "styles/lib/css-loader.css",
+        "styles/lib/jquery.modal.min.css"
       ],
       "run_at": "document_end"
     }
