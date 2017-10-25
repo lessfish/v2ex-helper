@@ -18,12 +18,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 function checkConversationBtn(message, sender, sendResponse) {
   let {floorOwner, replyUser, topicId} = message
   let conversations = [] // 对话详情数据，sendResponse() 返回的数据
-  let api = 'https://www.v2ex.com/api/replies/show.json?topic_id=' + topicId
+  // 去除缓存影响，但是 api 一小时只能调用 120 次
+  let api = 'https://www.v2ex.com/api/replies/show.json?topic_id=' + topicId + '&rdm=' + (+new Date) 
   
   fetch(api)
     .then(res => res.json())
     .then(results => {
-      const pattern = /@<a href="\/member\/.+?">(.+?)<\/a>/g // 获取层主回复用户名
+      const pattern = /@<a target="_blank" href="\/member\/.+?">(.+?)<\/a>/g // 获取层主回复用户名
 
       // 遍历回复数据
       results.forEach(res => {
