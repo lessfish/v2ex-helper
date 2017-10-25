@@ -16,75 +16,52 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
 
 // 对话详情
 function checkConversationBtn(message, sender, sendResponse) {
-  let {floorOwner, replyUser, url, replyNum} = message
-  let conversations = [] // 对话详情数据，返回的数据
-  let fetches = [] // 页面抓取
-  let fetchAvatars = [] // 头像抓取
-  const avatarsHash = {} // floorOwner & replyUser 头像链接的哈希 
-  let pageNum = Math.ceil(replyNum / 100)
-
-  for (let i = 1; i <= pageNum; i++) {
-    fetches.push(fetch(url + '?p=' + i).then(res => res.text()))
-  }
-
-  // get floorOwner and replyUser's avatars
-  fetchAvatars.push(fetch('https://www.v2ex.com/api/members/show.json?username=' + floorOwner).then(res => res.json()))
-  fetchAvatars.push(fetch('https://www.v2ex.com/api/members/show.json?username=' + replyUser).then(res => res.json()))
+  let {floorOwner, replyUser, topicId} = message
+  let conversations = [] // 对话详情数据，sendResponse() 返回的数据
+  let api = 'https://www.v2ex.com/api/replies/show.json?topic_id=' + topicId
   
-  Promise.all(fetchAvatars)
+  fetch(api)
+    .then(res => res.json())
     .then(results => {
+      const pattern = /@<a href="\/member\/.+?">(.+?)<\/a>/g // 获取层主回复用户名
+
+      // 遍历回复数据
       results.forEach(res => {
-        avatarsHash[res.username] = res.avatar_normal
+        let replyContent = res.content_rendered // 该楼层回复内容
+        let matches = replyContent.match(pattern) // replyContent 中有几个 @
+        let _floorOwner = res.member.username // 层主
+        let avatarsUrl = res.member.avatar_normal // 层主头像
+
+        // replyContent 中有 >=1 个 @ 时
+        if (matches && matches.length >= 1) {
+          let _replyUser = [] // 层主回复的用户数组
+          let matching;
+          
+          // 遍历，找到 @ 的用户，即层主回复的用户 
+          do {
+            matching = pattern.exec(replyContent);
+            if (matching) {
+              _replyUser.push(matching[1])
+            }
+          } while (matching !== null)
+
+          if ((_floorOwner === floorOwner && _replyUser.includes(replyUser)) ||
+              (_floorOwner === replyUser && _replyUser.includes(floorOwner))) {
+            conversations.push({from: _floorOwner, replyContent, avatarsUrl})
+          } 
+        }
+
+        // 单纯的回复楼层（回复中没有 @）
+        if (!matches) {
+          if (( _floorOwner === floorOwner) ||
+              (_floorOwner === replyUser)) {
+            conversations.push({from: _floorOwner, replyContent, avatarsUrl})
+          }
+        }
       })
 
-      Promise.all(fetches)
-        .then(results => {
-          const p = /<div id="r_\d+?"[\d\D]+?<\/table>[\d\D]+?<\/div>/g // 获取整个楼层
-          const pattern0 = /<div class="reply_content">([\d\D]+?)<\/div>/ // 获取回复内容
-          const pattern1 = /@<a href="\/member\/.+?">(.+?)<\/a>/g // 获取层主回复用户名
-          const pattern2 = /<strong><a[\d\D]+?>([\d\D]+)<\/a><\/strong>/ // 获取层主名
-
-          results.forEach(res => {
-            let cells = res.match(p)
-
-            cells.forEach(item => {
-              let replyContent = pattern0.exec(item)[1] // 该楼层回复的内容
-              let matches = replyContent.match(pattern1) // replyContent 中有几个 @
-              let _floorOwner = pattern2.exec(item)[1] // 层主
-
-              // replyContent 中有 >=1 个 @ 时
-              if (matches && matches.length >= 1) {
-                let _replyUser = [] // 层主回复的用户数组
-                let matching;
-                
-                // 遍历，找到 @ 的用户
-                do {
-                  matching = pattern1.exec(replyContent);
-                  if (matching) {
-                    _replyUser.push(matching[1])
-                  }
-                } while (matching !== null)
-
-                if ((_floorOwner === floorOwner && _replyUser.includes(replyUser)) ||
-                    (_floorOwner === replyUser && _replyUser.includes(floorOwner))) {
-                  conversations.push({from: _floorOwner, replyContent, avatarsUrl: avatarsHash[_floorOwner]})
-                } 
-              }
-
-              // 单纯的回复楼层（回复中没有 @）
-              if (!matches) {
-                if (( _floorOwner === floorOwner) ||
-                    (_floorOwner === replyUser)) {
-                  conversations.push({from: _floorOwner, replyContent, avatarsUrl: avatarsHash[_floorOwner]})
-                }
-              }
-            })
-          })
-
-          sendResponse({conversations: conversations})
-        })
+      sendResponse({conversations: conversations})
     })
-  
 }
 
 // 主题贴添加图片

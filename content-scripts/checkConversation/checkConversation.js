@@ -31,11 +31,10 @@
         method: 'checkConversationBtn',
         floorOwner: floorOwner,
         replyUser: replyUser,
-        url: 'https://www.v2ex.com/t/' + /\/t\/(\d+)/.exec(location.href)[1],
-        replyNum: +/(\d+) 回复/.exec($('#Main > div:nth-child(4) > div:nth-child(1) > span').html())[1]
+        topicId: /\/t\/(\d+)/.exec(location.href)[1]
       }, function(response) { // result array
         // console.log(response.conversations)
-        
+
         let html = ''
         response.conversations.forEach(item => {
           html += `
