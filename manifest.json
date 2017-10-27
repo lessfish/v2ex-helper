@@ -3,18 +3,21 @@
   "manifest_version": 2,
   "version": "1.1.0",
   "description": "the way to make v2ex better",
+  
+  // 一般情况下提供三种不同尺寸的图标
+  // 16*16 48*48 128*128(webapp)
   "icons":
   {
-    "16": "images/icon_16.png",
-    "48": "images/icon_48.png"
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png"
   },
 
   // 或者是 page_action
   "browser_action": {
     "default_title": "",
     "default_icon": {
-      "19": "images/icon_19.png",
-      "38": "images/icon_38.png"
+      "19": "icons/icon_19.png",
+      "38": "icons/icon_38.png"
     }
     // "default_popup": "popup/popup.html" 
   },
@@ -23,17 +26,19 @@
     // 或者设置项为 background.html，然后在它那引入 background.js
     "scripts": [
       "background-scripts/lib/jquery.min.js",
-      "background-scripts/background.js"
+      "background-scripts/background.js",
+      "background-scripts/getCfg.js"
     ] 
   },
   
-  // "options_ui": {
-  //   "page": "option/option.html"
-  // },
+  "options_ui": {
+    "page": "option/option.html"
+  },
   
   "permissions": [
     "tabs",
-    "*://*.weibo.com/*"
+    "storage",
+    "*://*.weibo.com/*" // 跨域
   ],
 
   "content_scripts": [
