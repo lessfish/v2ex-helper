@@ -94,6 +94,15 @@
         "styles/lib/jquery.modal.min.css"
       ],
       "run_at": "document_end"
+    },
+    {
+      // 签到
+      "matches": ["*://www.v2ex.com/*"],
+      "js": [
+        "content-scripts/lib/jquery.min.js",
+        "content-scripts/signin/signin.js"
+      ],
+      "run_at": "document_end"
     }
   ],
 
