@@ -3,19 +3,19 @@
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   switch(message.method) {
     case 'uploadImgInTopic':
-      uploadImgInTopic(message, sender, sendResponse)
+      uploadImgInTopic(message, sendResponse)
       // 异步，直到执行 sendResponse() 方法
       return true
       break
     case 'checkConversationBtn':
-      checkConversationBtn(message, sender, sendResponse)
+      checkConversationBtn(message, sendResponse)
       return true 
       break
   }
 })
 
 // 对话详情
-function checkConversationBtn(message, sender, sendResponse) {
+function checkConversationBtn(message, sendResponse) {
   let {floorOwner, replyUser, topicId} = message
   let conversations = [] // 对话详情数据，sendResponse() 返回的数据
   // 去除缓存影响，但是 api 一小时只能调用 120 次
@@ -66,7 +66,7 @@ function checkConversationBtn(message, sender, sendResponse) {
 }
 
 // 主题贴添加图片
-function uploadImgInTopic(message, sender, sendResponse) {
+function uploadImgInTopic(message, sendResponse) {
   // 微博图床接口
   let api = 'http://picupload.service.weibo.com/interface/pic_upload.php?\
     mime=image%2Fjpeg&data=base64&url=0'

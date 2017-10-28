@@ -11,8 +11,8 @@ chrome.runtime.sendMessage({
     const day = today.getDate()
     const todayStr = [year, month, day].join('-')
 
-    // 读取数据，第一个参数是指定要读取的 key 以及设置默认值
     chrome.storage.sync.get(['lastSigninDate'], function(items) {
+      console.log(items.lastSigninDate)
       if (items.lastSigninDate === todayStr) return // 今天已经签到过了
 
       // 保存数据
@@ -26,8 +26,11 @@ chrome.runtime.sendMessage({
         const api = p.exec(res)[0]
 
         $.get(api, res => {
+          console.log(res.status)
+          console.log(res)
           if (res.status === 200) {
             // 如果是首页，则替换
+            console.log($('.fa.fa-gift').length)
             if (!$('.fa.fa-gift').length) return 
 
             $('.fa.fa-gift').next().html('今日已签到')
@@ -37,4 +40,4 @@ chrome.runtime.sendMessage({
       })
     });
   })()
-});
+})

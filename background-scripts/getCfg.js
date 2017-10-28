@@ -1,19 +1,21 @@
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   switch(message.method) {
     case 'getConfig':
-      getConfig(message, sender, sendResponse)
+      getConfig(sendResponse)
       return true
       break
   }
 })
 
-function getConfig(message, sender, sendResponse) {
+function getConfig(callback) {
   const keys = [
     'cfg_checkReply',
     'cfg_zoom',
     'cfg_uploadImg',
     'cfg_checkConversation',
-    'cfg_signin'
+    'cfg_signin',
+    'cfg_notificationsPopup',
+    'cfg_notificationsIconShowNum',
   ]
 
   chrome.storage.sync.get(keys, function(cfg) {
@@ -21,6 +23,6 @@ function getConfig(message, sender, sendResponse) {
       cfg[item] = cfg[item] === undefined || cfg[item] ? true : false
     })
 
-    sendResponse(cfg)
+    callback(cfg)
   })
 }

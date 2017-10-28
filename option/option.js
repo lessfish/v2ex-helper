@@ -4,7 +4,9 @@
     '主题贴图片点击放大',
     '主题贴发图',
     '对话详情',
-    '自动签到'
+    '自动签到',
+    '新消息提醒（弹窗模式）',
+    '新消息提醒（图标提醒）',
   ]
 
   const keys = [
@@ -12,7 +14,9 @@
     'cfg_zoom',
     'cfg_uploadImg',
     'cfg_checkConversation',
-    'cfg_signin'
+    'cfg_signin',
+    'cfg_notificationsPopup',
+    'cfg_notificationsIconShowNum',
   ]
 
   chrome.storage.sync.get(keys, function(cfg) {
