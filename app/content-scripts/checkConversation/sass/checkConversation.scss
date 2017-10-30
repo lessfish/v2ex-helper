@@ -1,0 +1,44 @@
+/* www.v2ex.com/t/ */
+/* 对话详情 */
+#checkConversationBtn {
+  padding-left: 10px;
+  color: #ccc;
+  font-size: 12px;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  > i {
+    padding-right: 4px;
+  }
+}
+
+#conversationModal.modal {
+  max-width: 800px;
+  padding: 10px;
+  line-height: 1.6 !important;
+  word-break: break-all;
+  word-wrap: break-word;
+
+  > .cell {
+    overflow: hidden;
+
+    > .left {
+      float: left;
+
+      img {
+        border-radius: 4px;
+      }
+    }
+
+    > .right {
+      margin-left: 60px; 
+
+      > .author {
+        color: gray;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

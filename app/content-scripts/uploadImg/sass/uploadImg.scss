@@ -1,0 +1,19 @@
+/* www.v2ex.com/new */
+/* 发帖添加图片 */
+#uploadImgBtn {
+  float: right;
+  display: none;
+}
+
+#upload-trigger-btn {
+  padding-left: 10px;
+
+  &:hover {
+    cursor: pointer;
+    opacity: .7;
+  }
+}
+
+.not-allow {
+  pointer-events: none;
+}
