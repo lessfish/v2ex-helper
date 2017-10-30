@@ -11,6 +11,10 @@ function afterGetCfg(cfg) {
     })
   })
 
+  // todo
+  // 当访问 https://www.v2ex.com/notifications 后
+  // 如果 icon 有未读提醒，则取消
+
   if (!cfg.cfg_notificationsPopup && !cfg.cfg_notificationsIconShowNum) return 
 
   setInterval(() => {
@@ -20,7 +24,7 @@ function afterGetCfg(cfg) {
         const p = /(\d+) 条未读提醒/
         const r = p.exec(res)
 
-        if (!r) return
+        if (!r || r[1] === '0') return
 
         if (cfg.cfg_notificationsPopup) {
           chrome.notifications.create(null, {

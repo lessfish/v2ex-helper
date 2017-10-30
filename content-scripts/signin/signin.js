@@ -24,15 +24,12 @@ chrome.runtime.sendMessage({
 
         const p = /\/mission\/daily\/redeem\?once=\d+/
         const api = p.exec(res)[0]
-
+        
         $.get(api, res => {
-          console.log(res.status)
-          console.log(res)
-          if (res.status === 200) {
+          if (res) {
             // 如果是首页，则替换
-            console.log($('.fa.fa-gift').length)
             if (!$('.fa.fa-gift').length) return 
-
+            
             $('.fa.fa-gift').next().html('今日已签到')
             $('.fa.fa-gift').removeClass('fa-gift').addClass('fa-check')
           }
