@@ -14,7 +14,7 @@ module.exports = {
 
     // background-scripts
     'background-scripts/background.js': './app/background-scripts/background.js',
-
+    
     // popup
     'popup/popup.js': './app/popup/popup.js',
 
