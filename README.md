@@ -15,7 +15,7 @@
 
 ## Pack 
 
-1. `webpack --config webpack.ddl.config.js`
+1. `webpack --config webpack.dll.config.js`
 2. `webpack`
 
 ## ChangeLog
