@@ -13,6 +13,11 @@
 3. 勾选上「开发者模式」选项（右上角）
 4. 点击「加载已解压的扩展程序」（左上角），选择第一步下载的文件夹中的 **子文件夹 extension** 进行导入
 
+## Pack 
+
+1. `webpack --config webpack.ddl.config.js`
+2. `webpack`
+
 ## ChangeLog
 
 - 2017-08-13 [通知页面](https://www.v2ex.com/notifications) 点击「查看」可跳转到该回复具体楼层
@@ -23,10 +28,3 @@
 - 2017-10-27 新增设置（选项）页
 - 2017-10-28 新增消息提醒
 - 2017-10-30 使用 webpack 进行开发
-## Todo
-
-- feature
-  - 回复图床
-
-- code 
-  - 各种 js 功能梳理 

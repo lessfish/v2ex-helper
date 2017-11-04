@@ -1,7 +1,8 @@
 import './sass/uploadImg.scss'
 import {getSettingsAsync} from '../../settings/settings.js'
+// import 'babel-polyfill'
 
-// add img when creating a new topic
+// Add img when creating a new topic
 (async function () {
   let cfg = await getSettingsAsync()
   

@@ -24,7 +24,7 @@ import {getSettingsAsync} from '../settings/settings.js'
 })()
 
 // 消息提醒
-(async function() {
+;(async function() {
   let cfg = await getSettingsAsync()
   setNotifications(cfg)
 })()

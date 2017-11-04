@@ -1,4 +1,5 @@
 import {getSettingsAsync} from '../../settings/settings.js'
+// import 'babel-polyfill'
 
 // the script can deal with DOM
 (async function () {

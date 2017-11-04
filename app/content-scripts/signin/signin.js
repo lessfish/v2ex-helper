@@ -1,9 +1,11 @@
 import {getSettingsAsync} from '../../settings/settings.js'
+// import 'babel-polyfill'
 
 (async function() {
   let cfg = await getSettingsAsync()
 
   if (cfg.cfg_signin === false) return
+
   // 先判断今天有没有签到过，如果有，则直接返回 
   const today = new Date()
   const year = today.getFullYear()
@@ -18,7 +20,6 @@ import {getSettingsAsync} from '../../settings/settings.js'
     chrome.storage.sync.set({lastSigninDate: todayStr}, function() {})
 
     $.get('//www.v2ex.com/mission/daily', res => {
-      
       const isSignin = !res.includes('领取 X 铜币')
       if (isSignin) return
 

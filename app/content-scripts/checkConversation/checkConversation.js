@@ -3,6 +3,7 @@ import 'jquery-modal/jquery.modal.min.css'
 import './sass/checkConversation.scss'
 import 'jquery-modal/jquery.modal.min.js'
 import {getSettingsAsync} from '../../settings/settings.js'
+// import 'babel-polyfill'
 
 (async function() {
   let cfg = await getSettingsAsync()

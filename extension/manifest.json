@@ -62,22 +62,31 @@
     {
       // upload img in creating a new topic
       "matches": ["*://www.v2ex.com/new"],
-      "js": ["content-scripts/uploadImg/uploadImg.js"],
+      "js": [
+        "vendor/vendor.js",
+        "content-scripts/uploadImg/uploadImg.js"
+      ],
       "run_at": "document_end"
     },
     {
       // 对话详情
       "matches": ["*://www.v2ex.com/t/*"],
-      "js": ["content-scripts/checkConversation/checkConversation.js"],
+      "js": [
+        "vendor/vendor.js",
+        "content-scripts/checkConversation/checkConversation.js"
+      ],
       "run_at": "document_end"
     },
     {
       // 签到
       "matches": ["*://www.v2ex.com/*"],
-      "js": ["content-scripts/signin/signin.js"],
+      "js": [
+        "vendor/vendor.js",
+        "content-scripts/signin/signin.js"
+      ],
       "run_at": "document_end"
     }
   ],
 
-  "web_accessible_resources": []
+  "web_accessible_resources": [""]
 }
