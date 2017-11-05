@@ -61,19 +61,5 @@ module.exports = {
         context: __dirname,
         manifest: require('./manifest.json'),
     }),
-  ],
-  externals: {
-    // jquery 这个库就不用打包了
-    // 要用的时候指向 `$`，不要忘记需要引入 cdn，让全局知道有这个变量
-    // 局限性，并不是所有依赖都有生产环境的文件
-    // "jquery": '$',
-    // 方式一：申明为外部依赖并指定别名
-    // 公共文件，打包的时候不打入包内
-    // "jquery": "jquery",
-    // "react-dom": "ReactDOM"
-    // // 方式二：true 为外部依赖，false 则不是
-    // a: false,   // a is not external
-    // b: true     // b is external
-    // "jquery": "jquery"
-  }
+  ]
 };

@@ -1,5 +1,9 @@
 # V2EX HELPER
 
+## Intro
+
+[使用说明和功能介绍](INTRO.md)
+
 ## Usage
 
 1. 下载最新的 `v2ex-helper.crx` 文件（[下载点这里](https://github.com/hanzichi/v2ex-helper/releases)）

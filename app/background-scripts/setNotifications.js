@@ -14,7 +14,7 @@ export default function(cfg) {
   // todo
   // 当访问 https://www.v2ex.com/notifications 后
   // 如果 icon 有未读提醒，则取消
-
+  
   if (!cfg.cfg_notificationsPopup && !cfg.cfg_notificationsIconShowNum) return 
 
   setInterval(() => {

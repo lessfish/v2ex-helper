@@ -1,7 +1,7 @@
 {
   "name": "V2EX HELPER",
   "manifest_version": 2,
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "the way to make v2ex better",
   
   // 一般情况下提供三种不同尺寸的图标
