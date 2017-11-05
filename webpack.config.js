@@ -46,16 +46,6 @@ module.exports = {
         test: /\.js$/,
         use: ['babel-loader'],
         exclude: /node_modules/
-      },
-      {
-        // test: require.resolve('jquery'),
-        // use: [{
-        //   loader: 'expose-loader',
-        //   options: 'jQuery'
-        // },{
-        //   loader: 'expose-loader',
-        //   options: '$'
-        // }]
       }
     ]
   },
