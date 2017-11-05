@@ -1,5 +1,7 @@
 # INTRO
 
+多图，显示不了的话建议多刷新几次。
+
 ## 安装说明
 
 ![](https://ww1.sinaimg.cn/large/006lOxA2gy1fl7lf24js4g311f0kwx6p.gif)
@@ -10,7 +12,7 @@
 
 默认开启全部功能
 
-![](https://ww1.sinaimg.cn/large/006lOxA2gy1fl7lkums6oj31hg0vejx4.jpg)
+![](https://ws2.sinaimg.cn/large/006tNc79gy1fl7m4xzui8j31hg0vejx4.jpg)
 
 ### 回复通知增强
 
