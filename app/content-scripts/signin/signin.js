@@ -16,9 +16,6 @@ import {getSettingsAsync} from '../../settings/settings.js'
   chrome.storage.sync.get(['lastSigninDate'], function(items) {
     if (items.lastSigninDate === todayStr) return // 今天已经签到过了
 
-    // 保存数据
-    chrome.storage.sync.set({lastSigninDate: todayStr}, function() {})
-
     $.get('//www.v2ex.com/mission/daily', res => {
       const isSignin = !res.includes('领取 X 铜币')
       if (isSignin) return
@@ -33,6 +30,9 @@ import {getSettingsAsync} from '../../settings/settings.js'
           
           $('.fa.fa-gift').next().html('今日已签到')
           $('.fa.fa-gift').removeClass('fa-gift').addClass('fa-check')
+
+          // 今日签到
+          chrome.storage.sync.set({lastSigninDate: todayStr}, function() {})
         }
       })
     })
