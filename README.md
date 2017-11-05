@@ -2,7 +2,7 @@
 
 ## Intro
 
-[:rocket: 使用说明和功能介绍](INTRO.md)
+:rocket: [使用说明和功能介绍](INTRO.md)
 
 ## Usage
 
