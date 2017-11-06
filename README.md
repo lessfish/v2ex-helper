@@ -17,11 +17,6 @@
 3. 勾选上「开发者模式」选项（右上角）
 4. 点击「加载已解压的扩展程序」（左上角），选择第一步下载的文件夹中的 **子文件夹 extension** 进行导入
 
-## Dev 
-
-1. `webpack --config webpack.dll.config.js`
-2. `webpack`
-
 ## License
 
 MIT
