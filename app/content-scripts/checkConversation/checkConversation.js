@@ -1,7 +1,7 @@
 import 'pure-css-loader/dist/css-loader.css'
-import 'jquery-modal/jquery.modal.min.css'
 import './sass/checkConversation.scss'
-import 'jquery-modal/jquery.modal.min.js'
+import 'tingle.js/dist/tingle.min.css'
+import tingle from 'tingle.js'
 import {getSettingsAsync} from '../../settings/settings.js'
 // import 'babel-polyfill'
 
@@ -10,14 +10,11 @@ import {getSettingsAsync} from '../../settings/settings.js'
 
   if (!cfg.cfg_checkConversation) return
 
-  // add conversation modal
-  $('body').append('<form id="conversationModal" class="modal"></from>')
+  let replies = [].slice.call(document.querySelectorAll("div[id^='r_']"))
 
-  let replies = $("div[id^='r_']")
-
-  replies.each((index, item) => {
-    let floorOwner = $(item).find('strong a').html() // 层主
-    let replyContent = $(item).find('.reply_content').html()
+  replies.forEach((item, index) => {
+    let floorOwner = item.querySelector('strong a').innerHTML // 层主
+    let replyContent = item.querySelector('.reply_content').innerHTML
     const pattern = /@<a href="\/member\/.+?">(.+?)<\/a>/g
     let matches = replyContent.match(pattern)
 
@@ -25,18 +22,19 @@ import {getSettingsAsync} from '../../settings/settings.js'
     if (!matches || matches.length !== 1) return
 
     // add checkConversation Btn
-    $(item)
-      .find('.reply_content')
-      .prev()
-      .before(`<a href="javascript:;" id="checkConversationBtn">
+    item
+      .querySelector('.reply_content')
+      .previousElementSibling
+      .insertAdjacentHTML('beforebegin',
+        `<a href="javascript:;" id="checkConversationBtn">
         <i class="fa fa-comments" aria-hidden="true"></i>对话详情</a>`)
 
     // 层主回复的用户
     let replyUser = pattern.exec(replyContent)[1] 
 
-    $(item).find('#checkConversationBtn').on('click', () => {
+    item.querySelector('#checkConversationBtn').addEventListener('click', () => {
       // loading 
-      $('body').append('<div class="loader loader-default is-active"></div>')
+      document.body.insertAdjacentHTML('beforeend', '<div class="loader loader-default is-active"></div>')
 
       chrome.runtime.sendMessage({
         method: 'checkConversationBtn',
@@ -44,20 +42,18 @@ import {getSettingsAsync} from '../../settings/settings.js'
         replyUser: replyUser,
         topicId: /\/t\/(\d+)/.exec(location.href)[1]
       }, function(response) { // result array
-        // console.log(response.conversations)
-
         let html = ''
         response.conversations.forEach(item => {
           html += `
             <div class="cell">
               <div class="left">
-                <a href="https://www.v2ex.com/member/${item.from}">
+                <a href="//www.v2ex.com/member/${item.from}">
                   <img src="${item.avatarsUrl}" width=48 height=48 />
                 </a>
               </div>
               <div class="right">
                 <div class="author">
-                  <strong><a href="https://www.v2ex.com/member/${item.from}">${item.from}</a></strong>
+                  <strong><a href="//www.v2ex.com/member/${item.from}">${item.from}</a></strong>
                 </div>
                 <div class="replyContent">
                   ${item.replyContent}
@@ -67,14 +63,21 @@ import {getSettingsAsync} from '../../settings/settings.js'
           `
         })
 
-        $('#conversationModal').html(html)
-
         // remove loading
-        $('body .loader').remove()
+        let loader = document.querySelector('body .loader')
+        loader.parentNode.removeChild(loader)
 
         // show conversation modal 
-        $('#conversationModal').modal()
+        var modal = new tingle.modal({
+          closeMethods: ['overlay', 'button', 'escape']
+        })
+        
+        // set content
+        modal.setContent(html)
+
+        // open modal
+        modal.open()
       })
-    })
+    }, false)
   })
 })()

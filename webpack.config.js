@@ -57,9 +57,5 @@ module.exports = {
       'window.$': 'jquery'
     }),
     new UglifyJSPlugin(),
-    new webpack.DllReferencePlugin({
-        context: __dirname,
-        manifest: require('./manifest.json'),
-    }),
   ]
 };

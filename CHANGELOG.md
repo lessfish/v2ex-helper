@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2017-11-06
+
+Remove jQuery dependency
 ## 2017-10-30 
 
 使用 Webpack 进行开发

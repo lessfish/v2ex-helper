@@ -63,7 +63,6 @@
       // upload img in creating a new topic
       "matches": ["*://www.v2ex.com/new"],
       "js": [
-        "vendor/vendor.js",
         "content-scripts/uploadImg/uploadImg.js"
       ],
       "run_at": "document_end"
@@ -72,7 +71,6 @@
       // 对话详情
       "matches": ["*://www.v2ex.com/t/*"],
       "js": [
-        "vendor/vendor.js",
         "content-scripts/checkConversation/checkConversation.js"
       ],
       "run_at": "document_end"
@@ -81,7 +79,6 @@
       // 签到
       "matches": ["*://www.v2ex.com/*"],
       "js": [
-        "vendor/vendor.js",
         "content-scripts/signin/signin.js"
       ],
       "run_at": "document_end"

@@ -8,25 +8,26 @@ import {getSettingsAsync} from '../../settings/settings.js'
   
   if (!cfg.cfg_uploadImg) return
 
-  let uploadBtn = document.createElement('input')
-  uploadBtn.type = 'file'
-  uploadBtn.id = 'uploadImgBtn'
-
-  // append file upload btn
+  // append file upload btn and trigger btn
   document
-    .querySelector('#content_remaining')
+    .getElementById('content_remaining')
     .parentNode
-    .appendChild(uploadBtn)
+    .insertAdjacentHTML('beforeend',
+      `
+        <i class="fa fa-file-image-o" aria-hidden="true" id="uploadTriggerBtn"> 上传图片</i>
+        <input type="file" id="uploadImgBtn" />
+      `)
 
-  // add trigger btn
-  $('#uploadImgBtn').before('<i class="fa fa-file-image-o" aria-hidden="true" id="upload-trigger-btn"> 上传图片</i>')
+  const uploadTriggerBtn = document.getElementById('uploadTriggerBtn')
+  const uploadImgBtn = document.getElementById('uploadImgBtn')
 
-  $('#upload-trigger-btn').on('click', () => {
-    $('#uploadImgBtn').trigger('click')
+  uploadTriggerBtn.addEventListener('click', () => {
+    // TODO use CustomEvent
+    uploadImgBtn.click()
   })
 
   // add listener
-  document.querySelector('#uploadImgBtn').addEventListener('change', function() {
+  uploadImgBtn.addEventListener('change', function() {
     if (!this.files[0].type.includes('image')) {
       alert('请上传正确的图片格式文件 😄')
       return
@@ -35,12 +36,12 @@ import {getSettingsAsync} from '../../settings/settings.js'
     if (this.files.length === 0) return 
 
     // change trigger btn status
-    $('#upload-trigger-btn').addClass('not-allow')
-    $('#upload-trigger-btn').html(' 图片上传中...')
+    uploadTriggerBtn.classList.add('not-allow')
+    uploadTriggerBtn.innerHTML = ' 图片上传中...'
 
     let reader = new FileReader()
 
-    reader.onload = function() {
+    reader.onload = () => {
       let res = reader.result
       let dataURL = res.split(',')[1]
 
@@ -56,8 +57,8 @@ import {getSettingsAsync} from '../../settings/settings.js'
         }
 
         // change trigger btn status
-        $('#upload-trigger-btn').removeClass('not-allow')
-        $('#upload-trigger-btn').html(' 上传图片')
+        uploadTriggerBtn.classList.remove('not-allow')
+        uploadTriggerBtn.innerHTML = ' 上传图片'
 
         // 需要获取页面的全局变量 editor
         // content_scripts 无法获取页面的全局变量 editor，改用 injected_scripts

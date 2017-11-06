@@ -14,9 +14,8 @@
     "webpack": "^3.8.1"
   },
   "dependencies": {
-    "jquery": "^3.2.1",
-    "jquery-modal": "^0.9.1",
     "medium-zoom": "^0.2.0",
-    "pure-css-loader": "^3.0.1"
+    "pure-css-loader": "^3.0.1",
+    "tingle.js": "^0.12.0"
   }
 }
