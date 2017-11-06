@@ -36,10 +36,18 @@
 
 该天第一次登录 V 站，会自动帮你签到。
 
+默认没有提醒。如果登录的是首页，则会提示如下：
+
+![](https://ws1.sinaimg.cn/large/006tNc79gy1fl84fgqirej30z80hi40o.jpg)
+
 ### 新消息提醒（弹窗模式）
 
 如果有新消息，则通过弹窗进行提醒。默认 10 分钟检查一次。
 
+![](https://ws3.sinaimg.cn/large/006tNc79gy1fl84esx1kej30zk0lg0v4.jpg)
+
 ### 新消息提醒（图标提醒）
 
 如果有新消息，则右上角该扩展图标显示红色背景消息数进行提醒。默认 10 分钟检查一次。
+
+![](https://ws3.sinaimg.cn/large/006tNc79gy1fl843fsxk3j316a0ismz2.jpg)
