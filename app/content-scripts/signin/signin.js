@@ -33,8 +33,8 @@ import {getSettingsAsync} from '../../settings/settings.js'
               if (!document.querySelector('.fa.fa-gift')) return 
               
               document.querySelector('.fa.fa-gift').nextElementSibling.innerHTML = '今日已签到'
-              document.querySelector('.fa.fa-gift').classList.remove('fa-gift')
               document.querySelector('.fa.fa-gift').classList.add('fa-check')
+              document.querySelector('.fa.fa-gift').classList.remove('fa-gift')
               
               // 今日签到
               chrome.storage.sync.set({lastSigninDate: todayStr}, function() {})
