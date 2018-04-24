@@ -12,6 +12,7 @@ module.exports = {
     'content-scripts/uploadImg/uploadImg.js': './app/content-scripts/uploadImg/uploadImg.js',
     'content-scripts/signin/signin.js': './app/content-scripts/signin/signin.js',
     'content-scripts/checkConversation/checkConversation.js': './app/content-scripts/checkConversation/checkConversation.js',
+    'content-scripts/collection/collection.js': './app/content-scripts/collection/collection.js',
 
     // background-scripts
     'background-scripts/background.js': './app/background-scripts/background.js',

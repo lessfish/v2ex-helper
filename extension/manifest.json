@@ -63,6 +63,13 @@
       "run_at": "document_end"
     },
     {
+      "matches": ["*://www.v2ex.com/t/*"],
+      "js": [
+        "content-scripts/collection/collection.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
       "matches": ["*://www.v2ex.com/*"],
       "js": [
         "content-scripts/signin/signin.js"
